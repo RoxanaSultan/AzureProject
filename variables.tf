@@ -3,5 +3,5 @@ variable "vm_size" {
 }
 
 variable "vm_image" {
-  default     = "22_04-lts"
+  default     = "18_04-lts-gen2"
 }

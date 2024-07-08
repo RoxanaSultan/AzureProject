@@ -1,10 +1,12 @@
-resource "aws_network_interface" "test" {
-  subnet_id       = aws_subnet.public_a.id
-  private_ips     = ["10.0.0.50"]
-  security_groups = [aws_security_group.web.id]
+resource "azurerm_network_interface" "rg" {
+  name                = "rg-nic"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
 
-  attachment {
-    instance     = aws_instance.test.id
-    device_index = 1
+  ip_configuration {
+    name                          = "internal"
+    subnet_id                     = azurerm_subnet.rg.id
+    private_ip_address_allocation = "Dynamic"
+    public_ip_address_id          = azurerm_public_ip.rg.id
   }
 }
